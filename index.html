@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            body { margin: 0; }
+            /* button rule */
+            .twitch-status { align-items: center; background-color: #e5e5e5; border-radius: 5px; border: 1px solid transparent; color: #000; display: inline-flex; font-family: Arial; font-size: 12px; font-weight: bold; padding: 6px 12px; text-decoration: none; text-transform: capitalize; }
+            .twitch-status.live { background-color: #772ce8; color: #fff; }
+            .twitch-status .icon { background-color: #000; border-radius: 50%; height: 12px; margin-right: 6px; width: 12px; position: relative; }
+            .twitch-status .icon:before { content: ''; display: block; border-radius: 50%; width: 10px; height: 10px; background-color: #e5e5e5; position: absolute; left: -2px; top: -2px; }
+            .twitch-status.live .icon { background-color: #fff; border-color: transparent; animation: 1s ease-in-out breathe infinite alternate; }
+            .twitch-status.live .icon:before { display: none; }
+            /* animations */
+            @keyframes breathe { 0% { opacity: 1; } 100% { opacity: 0.1; } }
+        </style>
+    </head>
+    <body>
+        <a class="twitch-status" href="https://www.twitch.tv/kargoh" target="_blank">
+            <div class="icon"></div>
+            <div class="text"></div>
+        </a>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script>
+            // initialize user login and status variables
+            var login = '';
+            var twitchStatus = $('.twitch-status');
+            login = twitchStatus.attr('href').split('/');
+            login = login[3]; // get username from link
+
+            // Use ajax to call Twitch API - Client ID: https://dev.twitch.tv/console/apps/create
+            $.ajax({
+                type: 'GET',
+                url: 'https://api.twitch.tv/helix/streams?user_login=' + login,
+                headers: { 'Client-ID': 'cwsaw2mxwu6k70kk3nxa13g5spxesx' },
+                success: function (data) {
+                    console.log(data);
+                    var status = "offline"; // default if data not null
+                    if (data.data[0] != undefined) status = data.data[0]['type'];
+                    twitchStatus.addClass(status);
+                    twitchStatus.find('.text').text(status);
+                }
+            });
+        </script>
+    </body>
+</html>
