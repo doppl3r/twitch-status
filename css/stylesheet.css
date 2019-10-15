@@ -1,10 +1,14 @@
-body { margin: 0; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; height: 100vh; width: 100vw; font-family: Arial; }
+/* center content to full screen */
+.fullscreen { height: 100vh; width: 100vw; margin: 0; }
+.fullscreen.center { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; }
+
 /* button rule */
-.twitch-status { align-items: center; background-color: #e5e5e5; border-radius: 5px; border: 1px solid transparent; color: #000; display: inline-flex; font-size: 12px; font-weight: bold; padding: 6px 12px; text-decoration: none; text-transform: capitalize; }
+.twitch-status { align-items: center; background-color: #e5e5e5; border-radius: 5px; border: 1px solid transparent; color: #000; display: inline-flex; font-size: 12px; font-weight: bold; font-family: Arial; padding: 6px 12px; text-decoration: none; text-transform: capitalize; }
 .twitch-status.live { background-color: #772ce8; color: #fff; }
 .twitch-status .icon { background-color: #000; border-radius: 50%; height: 12px; margin-right: 6px; width: 12px; position: relative; }
 .twitch-status .icon:before { content: ''; display: block; border-radius: 50%; width: 10px; height: 10px; background-color: #e5e5e5; position: absolute; left: -2px; top: -2px; }
 .twitch-status.live .icon { background-color: #fff; border-color: transparent; animation: 1s ease-in-out breathe infinite alternate; }
 .twitch-status.live .icon:before { display: none; }
+
 /* animations */
 @keyframes breathe { 0% { opacity: 1; } 100% { opacity: 0.1; } }
