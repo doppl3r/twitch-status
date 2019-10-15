@@ -2,6 +2,7 @@ $(document).ready(function(){
     // initialize user login and status variables
     var login = '';
     var twitchStatus = $('.twitch-status');
+    twitchStatus.html('<div class="icon"></div><div class="text">Offline</div>');
     login = twitchStatus.attr('href').split('/');
     login = login[3]; // get username from link
 
